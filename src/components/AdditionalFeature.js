@@ -6,7 +6,13 @@ const AdditionalFeature = props => {
   return (
     <li>
       {/* Add an onClick that will let you add a feature to your car */}
-      <button className="button" onClick={props => addItem(props)}>
+      <button
+        className="button"
+        //Unique ID corresponding to name of feature
+        //gets passed into addItem action creator
+        id={props.feature.name}
+        onClick={e => props.addItem(e.target.id)}
+      >
         Add
       </button>
       {props.feature.name} (+{props.feature.price})
@@ -18,4 +24,4 @@ const mapStateToProps = state => {
   return {};
 };
 
-export default connect(mapStateToProps, {})(AdditionalFeature);
+export default connect(mapStateToProps, { addItem })(AdditionalFeature);

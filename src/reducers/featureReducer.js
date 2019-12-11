@@ -18,13 +18,22 @@ const initialState = {
   ]
 };
 
-//reducer function to delegate buy and remove item dispatching
+//reducer function to delegate add and remove item dispatching
 export const featureReducer = (state = initialState, action) => {
+  console.log(state);
   switch (action.type) {
     case ADD_ITEM:
       return {
-        //logic
+        ...state,
+        state: {
+          ...state.state,
+          car: {
+            ...state.state.car,
+            features: [...state.state.car.features, action.payload]
+          }
+        }
       };
+
     case REMOVE_ITEM:
       return {
         //logic
