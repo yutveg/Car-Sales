@@ -10,8 +10,7 @@ const AdditionalFeature = props => {
         className="button"
         //Unique ID corresponding to name of feature
         //gets passed into addItem action creator
-        id={props.feature.name}
-        onClick={e => props.addItem(e.target.id)}
+        onClick={() => props.addItem(props)}
       >
         Add
       </button>

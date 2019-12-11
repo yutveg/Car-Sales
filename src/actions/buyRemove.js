@@ -3,16 +3,17 @@ export const ADD_ITEM = "ADD_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
 
 //action creators
-export const addItem = name => {
-  console.log(name);
+export const addItem = item => {
   return {
     type: ADD_ITEM,
-    payload: name
+    payload: item.feature
   };
 };
 
 export const removeItem = item => {
+  console.log(item);
   return {
-    type: REMOVE_ITEM
+    type: REMOVE_ITEM,
+    payload: item.feature
   };
 };

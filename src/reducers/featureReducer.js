@@ -20,7 +20,7 @@ const initialState = {
 
 //reducer function to delegate add and remove item dispatching
 export const featureReducer = (state = initialState, action) => {
-  console.log(state);
+  console.log(action.payload);
   switch (action.type) {
     case ADD_ITEM:
       return {
@@ -29,14 +29,26 @@ export const featureReducer = (state = initialState, action) => {
           ...state.state,
           car: {
             ...state.state.car,
+            //spreads out previous features array, drops in our action.payload (the added feature) after
             features: [...state.state.car.features, action.payload]
           }
         }
       };
-
     case REMOVE_ITEM:
       return {
-        //logic
+        ...state,
+        state: {
+          ...state.state,
+          car: {
+            ...state.state.car,
+            //spreads out previous features array, drops in our action.payload (the added feature) after
+            features: [
+              ...state.state.car.features.filter(
+                item => item.id !== action.payload.id
+              )
+            ]
+          }
+        }
       };
     default:
       return { state };

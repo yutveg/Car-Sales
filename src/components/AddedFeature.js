@@ -5,8 +5,8 @@ import { removeItem } from "../actions/buyRemove.js";
 const AddedFeature = props => {
   return (
     <li>
-      {/* Add an onClick to run a function to remove a feature */}
-      <button className="button" onClick={props => removeItem(props)}>
+      {/* Added unique ID attribute to be able to pull later when needing to remove specific item*/}
+      <button className="button" onClick={() => props.removeItem(props)}>
         X
       </button>
       {props.feature.name}
@@ -18,4 +18,4 @@ const mapStateToProps = state => {
   return {};
 };
 
-export default connect(mapStateToProps, {})(AddedFeature);
+export default connect(mapStateToProps, { removeItem })(AddedFeature);
