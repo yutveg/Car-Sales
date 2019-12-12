@@ -20,37 +20,33 @@ const initialState = {
 
 //reducer function to delegate add and remove item dispatching
 export const featureReducer = (state = initialState, action) => {
-  console.log(action.payload);
+  //copying additional price to update state immutably
+  console.log(state);
   switch (action.type) {
     case ADD_ITEM:
-      return {
-        ...state,
-        state: {
-          ...state.state,
+      if (!state.car.features.includes(action.payload))
+        return {
+          ...state,
+          additionalPrice: state.additionalPrice + action.payload.price,
           car: {
-            ...state.state.car,
-            //spreads out previous features array, drops in our action.payload (the added feature) after
-            features: [...state.state.car.features, action.payload]
+            ...state.car,
+            features: [...state.car.features, action.payload]
           }
-        }
-      };
+        };
+      else return { ...state };
     case REMOVE_ITEM:
       return {
         ...state,
-        state: {
-          ...state.state,
-          car: {
-            ...state.state.car,
-            //spreads out previous features array, drops in our action.payload (the added feature) after
-            features: [
-              ...state.state.car.features.filter(
-                item => item.id !== action.payload.id
-              )
-            ]
-          }
+        additionalPrice: state.additionalPrice - action.payload.price,
+        car: {
+          ...state.car,
+          //spreads out previous features array, drops in our action.payload (the added feature) after
+          features: [
+            ...state.car.features.filter(item => item.id !== action.payload.id)
+          ]
         }
       };
     default:
-      return { state };
+      return { ...state };
   }
 };
